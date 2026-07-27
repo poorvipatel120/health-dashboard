@@ -10,18 +10,10 @@ body{
     padding:25px;
     min-height:100vh;
 
-    /* Dark red fallback */
-    background-color:#7b0f16;
+    background:#6b0000 !important;
 
-    /* Background image */
-    background-image:url("/static/bg.jpg");
-
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-}
-/* Dark Overlay */
+    font-family:Arial, Helvetica, sans-serif;
+}/* Dark Overlay */
 
 .main-container{
     display:flex;
