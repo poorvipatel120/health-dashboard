@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Smart Health Assistant Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <h1>🩺 Smart Health Assistant</h1>
+
+    <h3>Welcome {{ username }}</h3>
+
+    <div class="card">
+
+        <h2>📋 Enter Health Details</h2>
+
+        <form>
+
+            <input type="number" placeholder="Systolic BP">
+
+            <input type="number" placeholder="Diastolic BP">
+
+            <input type="number" placeholder="Blood Sugar">
+
+            <input type="number" placeholder="Height (cm)">
+
+            <input type="number" placeholder="Weight (kg)">
+
+            <button type="submit">
+                Analyze Health
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h2>⭐ Health Score</h2>
+
+        <h1>100 / 100</h1>
+
+    </div>
+
+    <div class="card">
+
+        <h2>⚖ BMI</h2>
+
+        <h1>--</h1>
+
+    </div>
+
+    <div class="card">
+
+        <h2>🤖 AI Suggestions</h2>
+
+        <p>Your personalized health recommendations will appear here.</p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

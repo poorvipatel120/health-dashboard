@@ -1,0 +1,347 @@
+/* =========================
+   SMART HEALTH ASSISTANT
+   ========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background-image:url("/static/bg.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    min-height:100vh;
+    padding:20px;
+    color:white;
+}
+
+/* Dark overlay */
+
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.45);
+    z-index:-1;
+}
+
+.main-container{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+}
+
+.left-panel{
+    width:70%;
+}
+
+.right-panel{
+    width:30%;
+}
+
+.logo-card{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+    margin-bottom:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+
+.logo-card h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.logo-card p{
+    font-size:18px;
+}
+
+.glass-card{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(18px);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+.thought-card{
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(18px);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+input{
+    width:100%;
+    padding:13px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+    font-size:15px;
+    background:rgba(255,255,255,.9);
+    color:#333;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#1E88E5;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1565C0;
+}
+/* ---------- STATUS CARDS ---------- */
+
+.status-card{
+    text-align:center;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:20px;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+.green{
+    background:#2ECC71;
+}
+
+.orange{
+    background:#F39C12;
+}
+
+.red{
+    background:#E74C3C;
+}
+
+/* ---------- HISTORY ---------- */
+
+.history{
+    border-bottom:1px solid rgba(255,255,255,.3);
+    padding:12px 0;
+}
+
+.history:last-child{
+    border-bottom:none;
+}
+
+.history p{
+    margin:6px 0;
+}
+
+.delete-btn{
+    width:auto;
+    padding:8px 18px;
+    margin-top:10px;
+    background:#E53935;
+}
+
+.delete-btn:hover{
+    background:#B71C1C;
+}
+
+/* ---------- TEXT ---------- */
+
+h1{
+    margin-bottom:10px;
+}
+
+h2{
+    margin-bottom:15px;
+}
+
+p{
+    line-height:1.7;
+}
+
+pre{
+    white-space:pre-wrap;
+    font-size:15px;
+    color:white;
+}
+
+/* ---------- CHART ---------- */
+
+canvas{
+    background:white;
+    border-radius:15px;
+    padding:10px;
+    width:100%;
+}
+
+/* ---------- LABEL ---------- */
+
+label{
+    font-weight:bold;
+    display:block;
+    margin-top:8px;
+    margin-bottom:5px;
+}
+
+/* ---------- SCROLLBAR ---------- */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#888;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#555;
+}
+/* ---------- GLASS EFFECT ---------- */
+
+.glass-card:hover,
+.thought-card:hover,
+.logo-card:hover{
+    transform:translateY(-3px);
+    transition:0.3s;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+
+/* ---------- LINKS ---------- */
+
+a{
+    text-decoration:none;
+}
+
+/* ---------- SUMMARY ---------- */
+
+.glass-card h2{
+    color:#ffffff;
+}
+
+.glass-card h1{
+    color:#00ffcc;
+    font-size:40px;
+}
+
+.right-panel h2{
+    color:#ffffff;
+}
+
+.right-panel p{
+    color:#f1f1f1;
+}
+
+/* ---------- INPUT FOCUS ---------- */
+
+input:focus{
+    outline:none;
+    box-shadow:0 0 10px #00bfff;
+}
+
+/* ---------- BUTTON EFFECT ---------- */
+
+button:active{
+    transform:scale(.98);
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width:900px){
+
+.main-container{
+    flex-direction:column;
+}
+
+.left-panel{
+    width:100%;
+}
+
+.right-panel{
+    width:100%;
+}
+
+.logo-card h1{
+    font-size:28px;
+}
+
+.logo-card p{
+    font-size:16px;
+}
+
+.glass-card,
+.thought-card{
+    padding:16px;
+}
+
+input{
+    font-size:14px;
+}
+
+button{
+    font-size:15px;
+}
+
+canvas{
+    height:250px !important;
+}
+
+body{
+    padding:12px;
+}
+
+}
+
+/* ---------- LARGE SCREENS ---------- */
+
+@media (min-width:1200px){
+
+.main-container{
+    max-width:1400px;
+    margin:auto;
+}
+
+}
+
+/* ---------- ANIMATION ---------- */
+
+.logo-card,
+.glass-card,
+.thought-card,
+.status-card{
+    animation:fadeIn .6s ease-in-out;
+}
+
+@keyframes fadeIn{
+
+from{
+    opacity:0;
+    transform:translateY(15px);
+}
+
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+
+}
+#bpChart{
+    width:100% !important;
+    height:300px !important;
+}

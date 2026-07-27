@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Smart Health Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <!-- LEFT PANEL -->
+
+    <div class="left-panel">
+
+        <div class="logo-card">
+
+            <h1>🫀 Smart Health Assistant</h1>
+
+            <p>Monitor your health smartly and safely.</p>
+
+        </div>
+
+        <div class="glass-card">
+
+            <form method="POST">
+           
+                <label>Name</label>
+                <input type="text" name="name" placeholder="Enter your name" required>
+                
+                <label>Date</label>
+
+                <input type="date"
+                       name="date"
+                       required>
+
+                <input type="number"
+                       name="systolic"
+                       placeholder="Systolic BP"
+                       required>
+
+                <input type="number"
+                       name="diastolic"
+                       placeholder="Diastolic BP"
+                       required>
+
+                <input type="number"
+                       name="sugar"
+                       placeholder="Blood Sugar"
+                       required>
+
+                <input type="number"
+                       name="height"
+                       placeholder="Height (cm)"
+                       required>
+
+                <input type="number"
+                       name="weight"
+                       placeholder="Weight (kg)"
+                       required>
+
+                <input type="text"
+                       name="medicine_name"
+                       placeholder="Medicine Name"
+                       required>
+
+
+                <button type="submit">
+
+                    Analyze Health
+
+                </button>
+
+            </form>
+
+        </div>
+
+        {% if status %}
+
+        <div class="status-card {{ status }}">
+
+            <h2>
+
+            {% if status=="red" %}
+
+            🔴 CRITICAL
+
+            {% elif status=="orange" %}
+
+            🟠 WARNING
+
+            {% else %}
+
+            🟢 HEALTHY
+
+            {% endif %}
+
+            </h2>
+
+
+        </div>
+
+        {% endif %}
+
+        {% if result %}
+
+        <div class="glass-card">
+
+            <h2>📊 Health Analysis</h2>
+
+            <pre>{{ result }}</pre>
+
+        </div>
+
+        {% endif %}
+        <div class="glass-card">
+
+            <h2>📅 Health History</h2>
+
+            {% for r in records %}
+
+            <div class="history">
+
+                <p><b>Name:</b> {{ r.name }}</p>
+
+                <p><b>Date:</b> {{ r.date }}</p>
+
+                <p><b>BP:</b> {{ r.systolic }}/{{ r.diastolic }}</p>
+
+                <p><b>Sugar:</b> {{ r.sugar }}</p>
+
+                <p><b>BMI:</b> {{ r.bmi }}</p>
+
+                <p><b>Status:</b> {{ r.status }}</p>
+
+                <p><b>Medicine:</b> {{ r.medicine_name }}</p>
+
+
+                <a href="/delete/{{ loop.index0 }}">
+                    <button class="delete-btn">Delete</button>
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% if status %}
+
+        <div class="glass-card">
+
+            <h2>📋 Health Summary</h2>
+
+            <p><b>Status:</b> {{ status }}</p>
+
+            <p><b>BMI:</b> {{ bmi }} ({{ bmi_category }})</p>
+
+        </div>
+
+        {% endif %}
+
+        <div class="glass-card">
+
+            <h2>⭐ Health Score</h2>
+
+            <h1>{{ health_score }}/100</h1>
+
+        </div>
+
+        <div class="glass-card">
+
+            <h2>🤖 AI Suggestions</h2>
+
+            <pre>{{ ai_tip }}</pre>
+
+        </div>
+
+        <div class="glass-card">
+
+            <h2>💡 Recommendations</h2>
+
+            <pre>{{ recommendation }}</pre>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+
+    <div class="right-panel">
+
+        <div class="thought-card">
+
+            <h2>💭 Daily Thoughts</h2>
+
+            <p>❤️ Your health is your greatest wealth.</p>
+
+            <p>💧 Drink enough water.</p>
+
+            <p>🏃 Exercise daily.</p>
+
+            <p>🥗 Eat healthy food.</p>
+
+        </div>
+
+        <div class="thought-card">
+
+            <h2>📌 Healthy Habits</h2>
+
+            <p>✔ Walk 30 minutes</p>
+
+            <p>✔ Sleep 7-8 hours</p>
+
+            <p>✔ Avoid junk food</p>
+
+            <p>✔ Reduce stress</p>
+
+        </div>
+
+        <div class="thought-card">
+
+            <h2>🚨 Emergency Tips</h2>
+
+            <p>⚠️ High BP → Stay calm</p>
+
+            <p>⚠️ High Sugar → Avoid sweets</p>
+
+            <p>⚠️ Chest Pain → Visit a doctor</p>
+
+        </div>
+        <div class="glass-card">
+
+            <h2>📊 Blood Pressure Trend</h2>
+
+            <canvas id="bpChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const records = {{ records | tojson }};
+
+const labels = records.map(r => r.date);
+
+const systolicData = records.map(r => r.systolic);
+
+const diastolicData = records.map(r => r.diastolic);
+
+new Chart(document.getElementById("bpChart"), {
+
+    type: "line",
+
+    data: {
+
+        labels: labels,
+
+        datasets: [
+
+        {
+
+            label: "Systolic BP",
+
+            data: systolicData,
+
+            borderColor: "red",
+
+            borderWidth: 3,
+
+            fill: false
+
+        },
+
+        {
+
+            label: "Diastolic BP",
+
+            data: diastolicData,
+
+            borderColor: "blue",
+
+            borderWidth: 3,
+
+            fill: false
+
+        }
+
+        ]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>
